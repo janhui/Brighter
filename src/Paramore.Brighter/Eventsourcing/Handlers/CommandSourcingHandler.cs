@@ -81,12 +81,14 @@ namespace Paramore.Brighter.Eventsourcing.Handlers
                 }
 
             }
-            
+
+            var handledCommand = base.Handle(command);
+
             _logger.Value.DebugFormat("Writing command {0} to the Command Store", command.Id);
 
             _commandStore.Add(command, _contextKey);
 
-            return base.Handle(command);
+            return handledCommand;
         }
 
     }
